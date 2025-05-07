@@ -258,7 +258,7 @@ client.on('messageCreate', async (message) => {
       // Crear el mensaje con el texto y la plantilla
       const embed = new EmbedBuilder()
         .setColor('#00AAFF')
-        .setTitle('Datos necesarios para un correcto informe')
+        .setTitle('Datos necesarios para un correcto informe 📋')
         .setDescription('Por favor, completa los siguientes datos para un informe adecuado:')
         .addFields(
           { name: 'Nombre de quien la realizó', value: '—' },
@@ -305,7 +305,7 @@ client.on('messageCreate', async (message) => {
       // Crear el mensaje con el texto y la plantilla
       const embed = new EmbedBuilder()
         .setColor('#00AAFF')
-        .setTitle('Registro de Cajeros - Datos requeridos')
+        .setTitle('Registro de Cajeros🚛 - Datos requeridos')
         .setDescription('Por favor, completa los siguientes datos:')
         .addFields(
           { name: 'Nombre del cajero', value: '—' },
