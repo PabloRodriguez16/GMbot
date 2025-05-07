@@ -149,7 +149,7 @@ client.on('guildMemberAdd', async (member) => {
       const embed = new EmbedBuilder()
         .setColor('#00AAFF')
         .setTitle(`¡Bienvenido, ${member.user.username}! 🎉`)
-        .setDescription(`Por favor, pasa al canal de **postulaciones** para postularte al equipo de Gruppe Milk.`)
+        .setDescription(`Por favor, pasa al canal de <#1368245252942463079> para postularte al equipo de Gruppe Milk.`)
         .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
         .setFooter({ text: 'Gruppe Milk - Seguridad y compromiso', iconURL: member.guild.iconURL() })
         .setTimestamp();
@@ -313,6 +313,7 @@ client.on('messageCreate', async (message) => {
           { name: 'Fecha', value: '—' },
           { name: 'Foto del cierre', value: '—' }
         )
+        .setImage('https://i.postimg.cc/52gF775r/image.png')
         .setFooter({ text: 'Gracias por registrar la información.', iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
@@ -338,6 +339,35 @@ client.on('messageCreate', async (message) => {
     }
   } catch (error) {
     console.error('Error al gestionar el mensaje:', error);
+  }
+});
+
+client.once('ready', async () => {
+  try {
+    const canalCarnet = client.channels.cache.find(channel => channel.name === '🚗foto-carnet-conducir');
+
+    if (!canalCarnet || !canalCarnet.isTextBased()) {
+      console.error('No se encontró el canal 🚗foto-carnet-conducir o no es un canal de texto.');
+      return;
+    }
+
+    // Mensaje inicial
+    await canalCarnet.send('Para continuar en el proceso de selección necesitas enviar una foto de tu carnet de conducir.');
+
+    // Embed con plantilla y ejemplo
+    const embed = new EmbedBuilder()
+      .setColor('#00AAFF')
+      .setTitle('📸 Foto del Carnet de Conducir')
+      .setDescription('La imagen debe mostrar todos los datos del carnet y tiene que estar sin vencer.\n\nEn caso de que haya vencido, se le pedirá que lo renueve cuanto antes para proseguir.')
+      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369099052159074435/image.png?ex=681c9a9a&is=681b491a&hm=b49fc5e9c5c05d5600c1334734857fd25752fd0be89c3900c438c7ee82b83ba6&') // Imagen de ejemplo
+      .setFooter({ text: 'Gruppe Milk - Proceso de Selección', iconURL: client.user.displayAvatarURL() })
+      .setTimestamp();
+
+    const mensaje = await canalCarnet.send({ embeds: [embed] });
+    await mensaje.pin();
+
+  } catch (error) {
+    console.error('Error al enviar o fijar el mensaje del carnet de conducir:', error);
   }
 });
 
