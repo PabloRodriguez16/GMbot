@@ -433,7 +433,8 @@ client.once('ready', async () => {
             `   - Instalación de alarmas\n` +
             `   - Reparación de alarmas\n` +
             `   - Revisión de puntos de seguridad\n` +
-            `• Recomendado para operativos con poca carga y alta movilidad.`
+            `• Recomendado para operativos con poca carga y alta movilidad.`,
+            image: 'https://cdn.discordapp.com/attachments/1361765019188199434/1369790002443321344/image.png?ex=681d23da&is=681bd25a&hm=15fc9bb36868c851a13df01b623590a24b7eb7257f5241711f2beb959d62f5d4&'
         },
         {
           name: '🚛 Stockade',
@@ -444,7 +445,8 @@ client.once('ready', async () => {
             `   - Instalación de alarmas\n` +
             `   - Reabastecimiento de cajeros automáticos\n` +
             `   - Encargos especiales que requieren protección\n` +
-            `• Ideal para operativos largos o en zonas de alto riesgo.`
+            `• Ideal para operativos largos o en zonas de alto riesgo.`,
+            image: 'https://cdn.discordapp.com/attachments/1361765019188199434/1369790076271202304/image.png?ex=681d23eb&is=681bd26b&hm=eb749089804942006e5b8d5b4c41bbce5425f0a54d01d827a4543a64cb89d002&'
         }
       )
       .setFooter({ text: 'Gruppe Milk - Uso responsable de recursos', iconURL: client.user.displayAvatarURL() })
