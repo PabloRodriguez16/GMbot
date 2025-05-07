@@ -406,5 +406,58 @@ client.once('ready', async () => {
   }
 });
 
+client.once('ready', async () => {
+  try {
+    const canalVehiculos = client.channels.cache.find(channel => channel.name === '🚙vehículos');
+
+    if (!canalVehiculos || !canalVehiculos.isTextBased()) {
+      console.error('No se encontró el canal 🚙vehículos o no es un canal de texto.');
+      return;
+    }
+
+    const embed = new EmbedBuilder()
+      .setColor('#3498DB')
+      .setTitle('🚙 Flota de Vehículos Operativos')
+      .setDescription(
+        `En este canal encontrarás información detallada sobre los vehículos habilitados por la empresa.\n` +
+        `Cada uno está equipado y asignado para tareas específicas relacionadas a nuestras operaciones.\n` +
+        `Por favor, usalos de forma responsable y reportá cualquier daño o incidente.`
+      )
+      .addFields(
+        {
+          name: '🚗 Dilettante',
+          value:
+            `• Vehículo liviano, ágil y de 4 puertas.\n` +
+            `• Ideal para tareas rápidas y urbanas.\n` +
+            `• Equipado con herramientas para:\n` +
+            `   - Instalación de alarmas\n` +
+            `   - Reparación de alarmas\n` +
+            `   - Revisión de puntos de seguridad\n` +
+            `• Recomendado para operativos con poca carga y alta movilidad.`
+        },
+        {
+          name: '🚛 Stockade',
+          value:
+            `• Vehículo blindado de gran tamaño y resistencia.\n` +
+            `• Capaz de transportar mercancías delicadas y de alto valor.\n` +
+            `• Equipado para:\n` +
+            `   - Instalación de alarmas\n` +
+            `   - Reabastecimiento de cajeros automáticos\n` +
+            `   - Encargos especiales que requieren protección\n` +
+            `• Ideal para operativos largos o en zonas de alto riesgo.`
+        }
+      )
+      .setFooter({ text: 'Gruppe Milk - Uso responsable de recursos', iconURL: client.user.displayAvatarURL() })
+      .setTimestamp();
+
+    const mensaje = await canalVehiculos.send({ embeds: [embed] });
+    await mensaje.pin();
+
+  } catch (error) {
+    console.error('Error al enviar o fijar el mensaje en el canal de vehículos:', error);
+  }
+});
+
+
 
 client.login(process.env.TOKEN);
