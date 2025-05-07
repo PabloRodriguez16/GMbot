@@ -266,6 +266,7 @@ client.on('messageCreate', async (message) => {
           { name: 'Fecha', value: '—' },
           { name: 'Foto', value: '—' }
         )
+        .setImage('https://i.postimg.cc/52gF775r/image.png')
         .setFooter({ text: 'Gracias por tu colaboración', iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
