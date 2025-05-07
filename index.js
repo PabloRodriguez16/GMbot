@@ -371,6 +371,40 @@ client.once('ready', async () => {
   }
 });
 
+client.once('ready', async () => {
+  try {
+    const canalGuia = client.channels.cache.find(channel => channel.name === '🗺guía-de-cargas');
+
+    if (!canalGuia || !canalGuia.isTextBased()) {
+      console.error('No se encontró el canal 🗺guía-de-cargas o no es un canal de texto.');
+      return;
+    }
+
+    const embed = new EmbedBuilder()
+      .setColor('#00B894')
+      .setTitle('📌 Guía de Cargas - Bienvenida')
+      .setDescription(
+        `¡Bienvenido a la **🗺guía-de-cargas**!\n\n` +
+        `En este canal encontrarás:\n` +
+        `• Ubicaciones clave al momento de hacer actividades\n` +
+        `• Consejos importantes para realizarlas correctamente\n` +
+        `• Otra información relevante que iremos actualizando\n\n` +
+        `---\n\n` +
+        `📍 **Ubicación para reabastecer alarmas a los vehículos**\n` +
+        `En muchas empresas del rubro la pregunta *"¿Dónde repongo las alarmas?"* es muy frecuente.\n` +
+        `Aquí tienes la ubicación exacta para hacerlo:`
+      )
+      .setImage('https://i.postimg.cc/Qtz3K4Yr/ubicacion-alarmas.png') // Link de ejemplo
+      .setFooter({ text: 'Gruppe Milk - Información útil para tus actividades', iconURL: client.user.displayAvatarURL() })
+      .setTimestamp();
+
+    const mensaje = await canalGuia.send({ embeds: [embed] });
+    await mensaje.pin();
+
+  } catch (error) {
+    console.error('Error al enviar o fijar el mensaje en guía-de-cargas:', error);
+  }
+});
 
 
 client.login(process.env.TOKEN);
