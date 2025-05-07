@@ -394,7 +394,7 @@ client.once('ready', async () => {
         `En muchas empresas del rubro la pregunta *"¿Dónde repongo las alarmas?"* es muy frecuente.\n` +
         `Aquí tienes la ubicación exacta para hacerlo:`
       )
-      .setImage('https://i.postimg.cc/Qtz3K4Yr/ubicacion-alarmas.png') // Link de ejemplo
+      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369786885454561441/GTA5_mVIHoyeHH3.jpg?ex=681d20f2&is=681bcf72&hm=f4db8e25dfee439e0e7005c8521fad65b5650555b8612aa06f0e0bd119669691&') // Link de ejemplo
       .setFooter({ text: 'Gruppe Milk - Información útil para tus actividades', iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
