@@ -209,23 +209,18 @@ client.once('ready', async () => {
 
 
 client.on('messageCreate', async (message) => {
-  // Asegurarse de que el mensaje sea de un usuario y no del bot
   if (message.author.bot) return;
 
   try {
-    // Verificar si el mensaje es en el canal correcto
     if (message.channel.name === '📝datos-de-empleado') {
       
-      // Obtener los mensajes del canal y eliminar el anterior del bot
       const mensajes = await message.channel.messages.fetch({ limit: 2 });
       const mensajeAnterior = mensajes.first();
       
-      // Si el bot ya tiene un mensaje, lo elimina
       if (mensajeAnterior && mensajeAnterior.author.bot) {
         await mensajeAnterior.delete();
       }
 
-      // Crear el mensaje de plantilla que se enviará
       const embed = new EmbedBuilder()
   .setColor('#00AAFF')
   .setTitle('Plantilla de Datos de Empleado')
@@ -239,7 +234,6 @@ client.on('messageCreate', async (message) => {
   .setTimestamp();
 
 
-      // Enviar el mensaje con la plantilla
       await message.channel.send({ embeds: [embed] });
     }
   } catch (error) {
@@ -248,14 +242,11 @@ client.on('messageCreate', async (message) => {
 });
 
 client.on('messageCreate', async (message) => {
-  // Asegurarse de que el mensaje sea de un usuario y no del bot
   if (message.author.bot) return;
 
   try {
-    // Verificar si el mensaje es en el canal correcto
     if (message.channel.name === '📅bitácora-de-actividades') {
 
-      // Crear el mensaje con el texto y la plantilla
       const embed = new EmbedBuilder()
         .setColor('#00AAFF')
         .setTitle('Datos necesarios para un correcto informe 📋')
@@ -270,15 +261,11 @@ client.on('messageCreate', async (message) => {
         .setFooter({ text: 'Gracias por tu colaboración', iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
-      // Enviar el mensaje con la plantilla
       await message.channel.send({ embeds: [embed] });
 
-      // Verificar si el mensaje contiene una imagen
       if (message.attachments.size > 0) {
-        // Si contiene imagen, reaccionar con tilde verde
         await message.react('✅');
       } else {
-        // Si no contiene imagen, enviar mensaje de advertencia
         const warningEmbed = new EmbedBuilder()
           .setColor('#FF0000')
           .setTitle('⚠ Advertencia')
@@ -295,14 +282,10 @@ client.on('messageCreate', async (message) => {
 });
 
 client.on('messageCreate', async (message) => {
-  // Asegurarse de que el mensaje sea de un usuario y no del bot
   if (message.author.bot) return;
 
   try {
-    // Verificar si el mensaje es en el canal correcto
     if (message.channel.name === '💳registro-de-cajeros') {
-
-      // Crear el mensaje con el texto y la plantilla
       const embed = new EmbedBuilder()
         .setColor('#00AAFF')
         .setTitle('Registro de Cajeros🚛 - Datos requeridos')
@@ -317,16 +300,12 @@ client.on('messageCreate', async (message) => {
         .setFooter({ text: 'Gracias por registrar la información.', iconURL: client.user.displayAvatarURL() })
         .setTimestamp();
 
-      // Enviar el mensaje con la plantilla
       await message.channel.send({ embeds: [embed] });
 
-      // Verificar si el mensaje contiene una imagen
       if (message.attachments.size > 0) {
-        // Reaccionar con tilde y camión
         await message.react('✅');
         await message.react('🚛');
       } else {
-        // Si no contiene imagen, enviar mensaje de advertencia
         const warningEmbed = new EmbedBuilder()
           .setColor('#FF0000')
           .setTitle('⚠ Advertencia')
@@ -351,10 +330,8 @@ client.once('ready', async () => {
       return;
     }
 
-    // Mensaje inicial
     await canalCarnet.send('Para continuar en el proceso de selección necesitas enviar una foto de tu carnet de conducir.');
 
-    // Embed con plantilla y ejemplo
     const embed = new EmbedBuilder()
       .setColor('#00AAFF')
       .setTitle('📸 Foto del Carnet de Conducir')
@@ -415,7 +392,6 @@ client.once('ready', async () => {
       return;
     }
 
-    // Embed general
     const embedPrincipal = new EmbedBuilder()
       .setColor('#3498DB')
       .setTitle('🚙 Flota de Vehículos Operativos')
@@ -427,7 +403,6 @@ client.once('ready', async () => {
       .setFooter({ text: 'Gruppe Milk - Uso responsable de recursos', iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
-    // Embed del Dilettante
     const embedDilettante = new EmbedBuilder()
       .setColor('#2ECC71')
       .setTitle('🚗 Dilettante')
@@ -442,7 +417,6 @@ client.once('ready', async () => {
       )
       .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790002443321344/image.png?ex=681d23da&is=681bd25a&hm=15fc9bb36868c851a13df01b623590a24b7eb7257f5241711f2beb959d62f5d4&');
 
-    // Embed del Stockade
     const embedStockade = new EmbedBuilder()
       .setColor('#E67E22')
       .setTitle('🚛 Stockade')
@@ -457,7 +431,6 @@ client.once('ready', async () => {
       )
       .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790076271202304/image.png?ex=681d23eb&is=681bd26b&hm=eb749089804942006e5b8d5b4c41bbce5425f0a54d01d827a4543a64cb89d002&');
 
-    // Enviar todos los embeds
     const mensaje = await canalVehiculos.send({ embeds: [embedPrincipal, embedDilettante, embedStockade] });
     await mensaje.pin();
 
@@ -466,6 +439,74 @@ client.once('ready', async () => {
   }
 });
 
+client.once('ready', async () => {
+  try {
+    const canalUniformes = client.channels.cache.find(channel => channel.name === '👕uniformes');
+
+    if (!canalUniformes || !canalUniformes.isTextBased()) {
+      console.error('No se encontró el canal 👕uniformes o no es un canal de texto.');
+      return;
+    }
+
+    const embed = new EmbedBuilder()
+      .setColor('#1ABC9C')
+      .setTitle('👕 Uniforme Oficial del Equipo')
+      .setDescription(
+        `Este es el uniforme designado para los miembros activos del equipo.\n` +
+        `Debe utilizarse durante todas las actividades oficiales de la empresa.\n` +
+        `El uniforme asegura una imagen profesional, facilita la identificación y fomenta la unidad del equipo.\n\n` +
+        `A continuación, se detallan cada una de las prendas con su respectivo estilo y color.`
+      )
+      .addFields(
+        {
+          name: '🧢 Gorra (opcional)',
+          value:
+            `• Estilo: Gorra hacia adelante\n` +
+            `• Color: Blanco\n` +
+            `• Se permite solo si no interfiere con otros elementos del uniforme.`
+        },
+        {
+          name: '👕 Camisa',
+          value:
+            `• Estilo: Camiseta tipo Polo\n` +
+            `• Color: Negra con letras blancas\n` +
+            `• Obligatoria para todas las actividades de campo y operativos.`
+        },
+        {
+          name: '👖 Pantalón',
+          value:
+            `• Estilo: Pantalón de trabajo arremangado 2\n` +
+            `• Color: Blanco\n` +
+            `• Debe mantenerse limpio y sin roturas.`
+        },
+        {
+          name: '🥾 Calzado',
+          value:
+            `• Estilo: Botas de montaña 2\n` +
+            `• Color: Blanco (#11)\n` +
+            `• Asegura estabilidad y protección durante las tareas.`
+        }
+      )
+      .setImage('https://example.com/imagen-uniforme-1.jpg') // Imagen general del uniforme
+      .setThumbnail('https://example.com/imagen-uniforme-2.jpg') // Primer plano de camisa o gorra
+      .setFooter({ text: 'Gruppe Milk - Identidad y profesionalismo', iconURL: client.user.displayAvatarURL() })
+      .setTimestamp();
+
+    const mensaje = await canalUniformes.send({
+      embeds: [embed],
+      files: [
+        'https://example.com/imagen-uniforme-1.jpg', // Imagen general del uniforme
+        'https://example.com/imagen-uniforme-2.jpg', // Imagen frontal
+        'https://example.com/imagen-uniforme-3.jpg'  // Imagen detalle de botas o pantalón
+      ]
+    });
+
+    await mensaje.pin();
+
+  } catch (error) {
+    console.error('Error al enviar o fijar el mensaje de uniformes:', error);
+  }
+});
 
 
 client.login(process.env.TOKEN);
