@@ -477,20 +477,20 @@ client.once('ready', async () => {
       .setFooter({ text: 'Gruppe Milk - Uniforme reglamentario', iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
+      const embedFrontal = new EmbedBuilder()
+        .setColor('#95A5A6')
+        .setTitle('📸 Vista Frontal')
+        .setImage('https://i.postimg.cc/6QFx3vbp/ghub-0-7-4-2025-20-26.png');
+
     const embedPerfil = new EmbedBuilder()
       .setColor('#95A5A6')
       .setTitle('📸 Vista de Perfil')
-      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790076271202304/image.png?ex=681d23eb&is=681bd26b&hm=eb749089804942006e5b8d5b4c41bbce5425f0a54d01d827a4543a64cb89d002&');
-
-    const embedFrontal = new EmbedBuilder()
-      .setColor('#95A5A6')
-      .setTitle('📸 Vista Frontal')
-      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790002443321344/image.png?ex=681d23da&is=681bd25a&hm=15fc9bb36868c851a13df01b623590a24b7eb7257f5241711f2beb959d62f5d4&');
+      .setImage('https://i.postimg.cc/zGt1sMnW/ghub-2-7-4-2025-20-26.png');
 
     const embedTrasero = new EmbedBuilder()
       .setColor('#95A5A6')
       .setTitle('📸 Vista Trasera')
-      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369789999999999999/image.png');
+      .setImage('https://i.postimg.cc/7L5ywVVR/ghub-4-7-4-2025-20-26.png');
 
     const mensaje = await canalUniformes.send({ embeds: [embedInfo, embedPerfil, embedFrontal, embedTrasero] });
     await mensaje.pin();
