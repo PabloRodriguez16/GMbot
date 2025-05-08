@@ -441,7 +441,7 @@ client.once('ready', async () => {
 
 client.once('ready', async () => {
   try {
-    const canalUniformes = client.channels.cache.find(channel => channel.name === '👕uniformes');
+    const canalUniformes = client.channels.cache.find(channel => channel.name === '👔uniformes');
 
     if (!canalUniformes || !canalUniformes.isTextBased()) {
       console.error('No se encontró el canal 👕uniformes o no es un canal de texto.');
