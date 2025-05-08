@@ -448,56 +448,51 @@ client.once('ready', async () => {
       return;
     }
 
-    const embed = new EmbedBuilder()
+    const embedInfo = new EmbedBuilder()
       .setColor('#1ABC9C')
       .setTitle('👔 Uniforme Oficial del Equipo')
       .setDescription(
         `Este es el uniforme oficial asignado a todos los miembros activos de la empresa.\n` +
-        `Su uso es obligatorio durante todas las actividades de campo y operativos, salvo que se indique lo contrario.\n` +
-        `El uniforme representa la identidad, disciplina y profesionalismo del equipo.\n\n` +
-        `A continuación, se detallan las prendas y se incluyen imágenes de referencia.`
+        `Su uso es obligatorio durante todas las actividades de campo y operativos, salvo que se indique lo contrario.\n\n` +
+        `**Detalles del uniforme:**`
       )
       .addFields(
         {
           name: '🧢 Gorra (opcional)',
-          value:
-            `• Estilo: Gorra hacia adelante\n` +
-            `• Color: Blanco con detalles coloridos\n` +
-            `• De uso opcional según preferencia personal.`
+          value: '• Gorra hacia adelante, color blanco con detalles coloridos.'
         },
         {
           name: '👕 Camisa',
-          value:
-            `• Estilo: Polo\n` +
-            `• Color: Negra con letras blancas\n` +
-            `• Debe estar siempre visible y en buen estado.`
+          value: '• Camiseta tipo Polo, color negra con letras blancas.'
         },
         {
           name: '👖 Pantalón',
-          value:
-            `• Estilo: Pantalón de trabajo arremangado 2\n` +
-            `• Color: Blanco\n` +
-            `• Cómodo y apto para movimiento continuo.`
+          value: '• Pantalón de trabajo arremangado 2, color blanco.'
         },
         {
           name: '🥾 Calzado',
-          value:
-            `• Estilo: Botas de montaña 2\n` +
-            `• Color: Blanco (variante #11)\n` +
-            `• Proporciona seguridad, estabilidad y tracción.`
-        },
-        {
-          name: '📸 Vista del uniforme completo',
-          value:
-            `• Perfil: https://example.com/uniforme-perfil.jpg\n` +
-            `• Frontal: https://example.com/uniforme-frontal.jpg\n` +
-            `• Trasero: https://example.com/uniforme-trasero.jpg`
+          value: '• Botas de montaña 2, color blanco (variante #11).'
         }
       )
       .setFooter({ text: 'Gruppe Milk - Uniforme reglamentario', iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
-    const mensaje = await canalUniformes.send({ embeds: [embed] });
+    const embedPerfil = new EmbedBuilder()
+      .setColor('#95A5A6')
+      .setTitle('📸 Vista de Perfil')
+      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790076271202304/image.png?ex=681d23eb&is=681bd26b&hm=eb749089804942006e5b8d5b4c41bbce5425f0a54d01d827a4543a64cb89d002&');
+
+    const embedFrontal = new EmbedBuilder()
+      .setColor('#95A5A6')
+      .setTitle('📸 Vista Frontal')
+      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369790002443321344/image.png?ex=681d23da&is=681bd25a&hm=15fc9bb36868c851a13df01b623590a24b7eb7257f5241711f2beb959d62f5d4&');
+
+    const embedTrasero = new EmbedBuilder()
+      .setColor('#95A5A6')
+      .setTitle('📸 Vista Trasera')
+      .setImage('https://cdn.discordapp.com/attachments/1361765019188199434/1369789999999999999/image.png');
+
+    const mensaje = await canalUniformes.send({ embeds: [embedInfo, embedPerfil, embedFrontal, embedTrasero] });
     await mensaje.pin();
 
   } catch (error) {
