@@ -444,67 +444,64 @@ client.once('ready', async () => {
     const canalUniformes = client.channels.cache.find(channel => channel.name === '👔uniformes');
 
     if (!canalUniformes || !canalUniformes.isTextBased()) {
-      console.error('No se encontró el canal 👕uniformes o no es un canal de texto.');
+      console.error('No se encontró el canal 👔uniformes o no es un canal de texto.');
       return;
     }
 
     const embed = new EmbedBuilder()
       .setColor('#1ABC9C')
-      .setTitle('👕 Uniforme Oficial del Equipo')
+      .setTitle('👔 Uniforme Oficial del Equipo')
       .setDescription(
-        `Este es el uniforme designado para los miembros activos del equipo.\n` +
-        `Debe utilizarse durante todas las actividades oficiales de la empresa.\n` +
-        `El uniforme asegura una imagen profesional, facilita la identificación y fomenta la unidad del equipo.\n\n` +
-        `A continuación, se detallan cada una de las prendas con su respectivo estilo y color.`
+        `Este es el uniforme oficial asignado a todos los miembros activos de la empresa.\n` +
+        `Su uso es obligatorio durante todas las actividades de campo y operativos, salvo que se indique lo contrario.\n` +
+        `El uniforme representa la identidad, disciplina y profesionalismo del equipo.\n\n` +
+        `A continuación, se detallan las prendas y se incluyen imágenes de referencia.`
       )
       .addFields(
         {
           name: '🧢 Gorra (opcional)',
           value:
             `• Estilo: Gorra hacia adelante\n` +
-            `• Color: Blanco\n` +
-            `• Se permite solo si no interfiere con otros elementos del uniforme.`
+            `• Color: Blanco con detalles coloridos\n` +
+            `• De uso opcional según preferencia personal.`
         },
         {
           name: '👕 Camisa',
           value:
-            `• Estilo: Camiseta tipo Polo\n` +
+            `• Estilo: Polo\n` +
             `• Color: Negra con letras blancas\n` +
-            `• Obligatoria para todas las actividades de campo y operativos.`
+            `• Debe estar siempre visible y en buen estado.`
         },
         {
           name: '👖 Pantalón',
           value:
             `• Estilo: Pantalón de trabajo arremangado 2\n` +
             `• Color: Blanco\n` +
-            `• Debe mantenerse limpio y sin roturas.`
+            `• Cómodo y apto para movimiento continuo.`
         },
         {
           name: '🥾 Calzado',
           value:
             `• Estilo: Botas de montaña 2\n` +
-            `• Color: Blanco (#11)\n` +
-            `• Asegura estabilidad y protección durante las tareas.`
+            `• Color: Blanco (variante #11)\n` +
+            `• Proporciona seguridad, estabilidad y tracción.`
+        },
+        {
+          name: '📸 Vista del uniforme completo',
+          value:
+            `• Perfil: https://example.com/uniforme-perfil.jpg\n` +
+            `• Frontal: https://example.com/uniforme-frontal.jpg\n` +
+            `• Trasero: https://example.com/uniforme-trasero.jpg`
         }
       )
-      .setImage('https://example.com/imagen-uniforme-1.jpg') // Imagen general del uniforme
-      .setThumbnail('https://example.com/imagen-uniforme-2.jpg') // Primer plano de camisa o gorra
-      .setFooter({ text: 'Gruppe Milk - Identidad y profesionalismo', iconURL: client.user.displayAvatarURL() })
+      .setFooter({ text: 'Gruppe Milk - Uniforme reglamentario', iconURL: client.user.displayAvatarURL() })
       .setTimestamp();
 
-    const mensaje = await canalUniformes.send({
-      embeds: [embed],
-      files: [
-        'https://example.com/imagen-uniforme-1.jpg', // Imagen general del uniforme
-        'https://example.com/imagen-uniforme-2.jpg', // Imagen frontal
-        'https://example.com/imagen-uniforme-3.jpg'  // Imagen detalle de botas o pantalón
-      ]
-    });
-
+    const mensaje = await canalUniformes.send({ embeds: [embed] });
     await mensaje.pin();
 
   } catch (error) {
-    console.error('Error al enviar o fijar el mensaje de uniformes:', error);
+    console.error('Error al enviar o fijar el mensaje en el canal de uniformes:', error);
   }
 });
 
